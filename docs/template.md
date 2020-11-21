@@ -9,7 +9,9 @@
 
 ## Dataflow Diagram - Level 0 DFD
 
-![](sample.png)
+![Level 0 DFD](dfd.png)
+
+![Level 1,2 DFD](seq.png)
 
 &nbsp;
 

@@ -61,3 +61,18 @@ docs: docs/pytm/index.html docs/threats.md
 .PHONY: fmt
 fmt:
 	black  $(wildcard pytm/*.py) $(wildcard tests/*.py) $(wildcard *.py)
+
+
+diag-report: 
+	python3 tm.py --dfd | dot -Tpng -o output/dfd.png && python3 tm.py --seq | java -Djava.awt.headless=true -jar plantuml.jar -tpng -pipe > output/seq.png && python3 tm.py --report docs/template.md | pandoc -f markdown -t html > output/report.html
+
+dataflow-dg:
+	python3 tm.py --dfd | dot -Tpng -o output/dfd.png
+	# python3 tm.py --dfd | dot -Txdot1.2 -o output/dfd.DOT
+
+sequence-dg:
+	python3 tm.py --seq | java -Djava.awt.headless=true -jar plantuml.jar -tpng -pipe > output/seq.png
+
+report: 
+	python3 tm.py --report docs/template.md | pandoc -f markdown -t html > output/report.html
+
